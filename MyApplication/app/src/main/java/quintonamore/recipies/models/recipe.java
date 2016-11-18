@@ -1,6 +1,7 @@
 package quintonamore.recipies.models;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  * Created by Quinton on 11/16/2016.
@@ -8,9 +9,9 @@ import java.util.ArrayList;
  * Should only add the steps once all of the ingredients are added.
  */
 
-public class recipe {
+public class recipe implements Serializable{
     private ArrayList<ingredient> i_list ;
-    private ArrayList<step> steps ;
+    public ArrayList<step> steps ;
     String recipeName;
 
     /**
@@ -44,9 +45,43 @@ public class recipe {
         steps.add(s);
     }
 
+    /**
+     * Return the number of ingredients.
+     * @return
+     */
+    public int getNumIngredients(){
+        return i_list.size();
+    }
+
+    /**
+     * Return the number of steps.
+     * @return
+     */
+    public int getNumSteps(){
+        return steps.size();
+    }
+
+    /**
+     * Return the amount of the specific ingredient.
+     * @param i
+     * @return
+     */
+    public String getIAmount(int i){
+        return i_list.get(i).getAmmount();
+    }
+
+    /**
+     * Return the name of the ingredient.
+     * @param i
+     * @return
+     */
+    public String getIName(int i){
+        return i_list.get(i).getName();
+    }
+
 }
 
-class ingredient {
+class ingredient implements Serializable{
 
     String name, ammount;
 
@@ -77,7 +112,7 @@ class ingredient {
     }
 }
 
-class step {
+class step implements Serializable{
     String stepText;
     ArrayList<Integer> i_reference;
 

@@ -5,6 +5,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.Serializable;
+
 import quintonamore.recipies.models.recipe;
 
 /**
@@ -13,14 +15,15 @@ import quintonamore.recipies.models.recipe;
  * specifically grabs a recipe from food.com
  */
 
-public class p_food {
+public class p_food implements Serializable{
 
-    recipe r_parse;
-    Document doc ;
-    public Elements ingredients;
-    public Elements steps;
+    public recipe r_parse;
 
     public p_food(String url){
+        Document doc = new Document("T");
+        Elements ingredients;
+        Elements steps;
+
         //Try to connect to the user's given url.
         try {
             doc = Jsoup.connect(url).get();
@@ -39,12 +42,23 @@ public class p_food {
 
         r_parse = new recipe(t);
 
+        //Parse the elements and add them to r_parse.
         for(Element element : ingredients){
             String temp = element.text();
             int i = 0;
             while(i < temp.length() && !Character.isAlphabetic(i))i++;
 
+            String a = temp.substring(0, i-1);
+            String in = temp.substring(i);
+
+            r_parse.addIngredient(in, a);
         }
+
+        //Parse the steps into r_parse
+        for(Element element : steps ){
+            r_parse.addStep(element.text());
+        }
+
 
     }
 }
