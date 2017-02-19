@@ -28,7 +28,7 @@ public class p_food implements Serializable{
         try {
             doc = Jsoup.connect(url).get();
         } catch(java.io.IOException e){
-            //Some error handling later.
+            //Some error handling later. Q you should do this.
         }
 
         ingredients = doc.getElementsByAttribute("data-ingredient");
@@ -48,7 +48,7 @@ public class p_food implements Serializable{
             int i = 0;
             while(i < temp.length() && !Character.isAlphabetic(i))i++;
 
-            String a = temp.substring(0, i-1);
+            String a = temp.substring(0, i);
             String in = temp.substring(i);
 
             r_parse.addIngredient(in, a);

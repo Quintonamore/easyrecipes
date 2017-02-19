@@ -21,6 +21,6 @@ public class ExampleUnitTest {
     @Test
     public void t() throws Exception {
         p_food t = new p_food("http://www.food.com/recipe/bourbon-chicken-45809");
-        System.out.println(t.steps.get(0));
+        System.out.println(t.r_parse.getIName(0) + t.r_parse.getIAmount(0));
     }
 }

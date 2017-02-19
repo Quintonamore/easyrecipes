@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class recipe implements Serializable{
     private ArrayList<ingredient> i_list ;
     public ArrayList<step> steps ;
-    String recipeName;
+    public String recipeName;
 
     /**
      * Take in the name, and assign it to recipeName, then instantiate i_list and steps.
@@ -79,6 +79,13 @@ public class recipe implements Serializable{
         return i_list.get(i).getName();
     }
 
+    /**
+     * Returns the text of the specified step.
+     * @param i
+     * @return
+     */
+    public String getStepText(int i) { return steps.get(i).getStepText();}
+
 }
 
 class ingredient implements Serializable{
@@ -139,7 +146,7 @@ class step implements Serializable{
         return i_reference;
     }
 
-    String getStepText(){
+    public String getStepText(){
         return stepText;
     }
 }
