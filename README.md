@@ -1,5 +1,4 @@
 # Recipes
-=========
 
 Recipes is an Android application that allows users to easily save recipes to their phone. 
 
