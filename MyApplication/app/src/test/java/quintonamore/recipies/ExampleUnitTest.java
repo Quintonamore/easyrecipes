@@ -3,24 +3,39 @@ package quintonamore.recipies;
 import org.junit.Test;
 
 import quintonamore.recipies.parsers.p_food;
+import quintonamore.recipies.parsers.p_foodnetwork;
 
 import static org.junit.Assert.*;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * Originally generated test file, now using Example Unit Test to test the functionality
+ * of the p_food class.
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
     /*
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    Test to make sure the food parser works properly.
     }
     */
     @Test
-    public void t() throws Exception {
+    public void nameTest() throws Exception {
         p_food t = new p_food("http://www.food.com/recipe/bourbon-chicken-45809");
-        System.out.println(t.r_parse.getIName(0) + t.r_parse.getIAmount(0));
+
+        assertEquals(t.r_parse.recipeName, "Bourbon Chicken");
+
+    }
+
+    @Test
+    public void ingredientTest() throws Exception {
+        p_foodnetwork t = new p_foodnetwork("http://www.foodnetwork.com/recipes/slow-cooker-corned-beef-and-cabbage-recipe");
+
+        System.out.println(t.r_parse.recipeName);
+
+        System.out.println(t.r_parse.getNumIngredients());
+
+
+
     }
 }
