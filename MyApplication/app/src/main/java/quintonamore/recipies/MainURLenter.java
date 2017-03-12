@@ -12,25 +12,31 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 import quintonamore.recipies.parsers.p_food;
+import quintonamore.recipies.parsers.p_foodnetwork;
 import quintonamore.recipies.utilities.RetrieveData;
+import quintonamore.recipies.utilities.RetrieveDataNet;
 
 import static quintonamore.recipies.R.id.gen_recipe;
 import static quintonamore.recipies.R.id.url_input;
 
+/**
+ * This is where the user will find the recipe they want and then submit it
+ * so that they can easily read and keep the recipe on their phone.
+ *
+ */
 public class MainURLenter extends AppCompatActivity {
 
     private Button btn;
+    private String website;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_urlenter);
-
-        Toolbar tbar = (Toolbar) findViewById(R.id.urlToolbar);
-        setSupportActionBar(tbar);
 
         //Web View Setup
         WebView b = (WebView) findViewById(R.id.webView);
@@ -46,8 +52,10 @@ public class MainURLenter extends AppCompatActivity {
 
         b.setWebViewClient(new WebViewClient());
 
+        website = (String) getIntent().getSerializableExtra("url");
+
         //Set the webview to the only site I have set up data scraping from.
-        b.loadUrl("http://www.food.com/recipe");
+        b.loadUrl(website);
 
 
     }
@@ -61,14 +69,27 @@ public class MainURLenter extends AppCompatActivity {
         WebView wbv = (WebView) findViewById(R.id.webView);
         String s = wbv.getUrl();
 
-        RetrieveData d = new RetrieveData();
-        d.execute(s);
-        p_food parse = d.get();
+        //Check to see which parser to use
+        if(website == "http://www.food.com/recipe"){
+            RetrieveData d = new RetrieveData();
+            d.execute(s);
+            p_food parse = d.get();
 
-        Intent intent = new Intent(this, recipe_viewer.class);
-        //Send the parsed recipe through the intent.
-        intent.putExtra("Recipe", parse);
-        startActivity(intent);
+            Intent intent = new Intent(this, recipe_viewer.class);
+            //Send the parsed recipe through the intent.
+            intent.putExtra("Recipe", parse);
+            startActivity(intent);
+        }
+        else{
+            RetrieveDataNet d = new RetrieveDataNet();
+            d.execute(s);
+            p_foodnetwork parsenet = d.get();
+
+            Intent intent = new Intent(this, recipe_viewer.class);
+            //Send the parsed recipe through the intent.
+            intent.putExtra("Recipe", parsenet);
+            startActivity(intent);
+        }
     }
 
 }

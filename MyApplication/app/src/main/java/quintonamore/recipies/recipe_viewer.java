@@ -6,6 +6,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import quintonamore.recipies.parsers.p_food;
+import quintonamore.recipies.parsers.p_foodnetwork;
+import quintonamore.recipies.parsers.recipeParse;
 
 import static quintonamore.recipies.R.layout.activity_recipe_viewer;
 
@@ -14,25 +16,37 @@ public class recipe_viewer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        p_food parse = (p_food) getIntent().getSerializableExtra("Recipe");
         setContentView(R.layout.activity_recipe_viewer);
 
-        TextView RName = (TextView) findViewById(R.id.textView);
-        RName.setText(parse.r_parse.recipeName);
+        recipeParse parse;
+
+        try {
+            parse = (p_food) getIntent().getSerializableExtra("Recipe");
+        }catch(java.lang.ClassCastException e){
+            parse = (p_foodnetwork) getIntent().getSerializableExtra("Recipe");
+        }
+
+        TextView RName;
+
+        while((RName = (TextView) findViewById(R.id.textViewRecipe)) == null){
+            // Just loop!
+        }
+
+        RName.setText(parse.getRecipe().recipeName);
+
 
         RName.append("\n\n" + "Ingredients\n\n");
 
-        int ingCount = parse.r_parse.getNumIngredients();
-        int stepsCount = parse.r_parse.getNumSteps();
+        int ingCount = parse.getRecipe().getNumIngredients();
+        int stepsCount = parse.getRecipe().getNumSteps();
 
         for(int i = 0; i <ingCount; i++){
-            RName.append(i+1 +") " + parse.r_parse.getIAmount(i)+ "\n");
+            RName.append(i+1 +") " + parse.getRecipe().getIAmount(i)+ "\n");
         }
         RName.append("\nSteps\n\n");
         for(int i = 0; i <stepsCount-1; i++){
 
-            RName.append(i+1 +") " + parse.r_parse.getStepText(i) + "\n\n");
+            RName.append(i+1 +") " + parse.getRecipe().getStepText(i) + "\n\n");
         }
     }
 }

@@ -5,13 +5,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.Serializable;
+
 import quintonamore.recipies.models.recipe;
 
 /**
- * Created by teas9 on 3/11/2017.
+ * This parser gets recipe information from Foodnetwork.com
+ *
+ * Doesn't work too well with the custom recipes, need to look into how to detect
+ * and format better.
+ *
  */
-
-public class p_foodnetwork {
+public class p_foodnetwork extends recipeParse implements Serializable {
 
     public recipe r_parse;
 
@@ -56,5 +61,14 @@ public class p_foodnetwork {
         for(Element element : steps ){
             r_parse.addStep(element.text());
         }
+    }
+
+    /**
+     * Getter for the recipe object.
+     * @return
+     */
+    @Override
+    public recipe getRecipe(){
+        return r_parse;
     }
 }

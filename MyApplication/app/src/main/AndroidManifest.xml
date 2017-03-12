@@ -2,22 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="quintonamore.recipies">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainURLenter">
+        <activity android:name=".siteSelect">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".recipe_viewer"></activity>
+        <activity android:name=".recipe_viewer" />
+        <activity
+            android:name=".MainURLenter"
+            android:label="@string/title_activity_site_select"
+            android:theme="@style/AppTheme"></activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

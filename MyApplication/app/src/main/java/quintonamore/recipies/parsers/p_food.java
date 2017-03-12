@@ -15,7 +15,7 @@ import quintonamore.recipies.models.recipe;
  * specifically grabs a recipe from food.com
  */
 
-public class p_food implements Serializable{
+public class p_food extends recipeParse implements Serializable {
 
     public recipe r_parse;
 
@@ -60,5 +60,14 @@ public class p_food implements Serializable{
         }
 
 
+    }
+
+    /**
+     * Getter for the recipe object.
+     * @return
+     */
+    @Override
+    public recipe getRecipe(){
+        return r_parse;
     }
 }
