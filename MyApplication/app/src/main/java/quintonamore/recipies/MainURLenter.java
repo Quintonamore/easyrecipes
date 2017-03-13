@@ -1,27 +1,23 @@
 package quintonamore.recipies;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.EditText;
 
-import java.io.Serializable;
+
 import java.util.concurrent.ExecutionException;
 
 import quintonamore.recipies.parsers.p_food;
 import quintonamore.recipies.parsers.p_foodnetwork;
+import quintonamore.recipies.parsers.recipeParse;
 import quintonamore.recipies.utilities.RetrieveData;
 import quintonamore.recipies.utilities.RetrieveDataNet;
 
 import static quintonamore.recipies.R.id.gen_recipe;
-import static quintonamore.recipies.R.id.url_input;
 
 /**
  * This is where the user will find the recipe they want and then submit it
@@ -69,27 +65,25 @@ public class MainURLenter extends AppCompatActivity {
         WebView wbv = (WebView) findViewById(R.id.webView);
         String s = wbv.getUrl();
 
+        recipeParse parse;
+
         //Check to see which parser to use
         if(website == "http://www.food.com/recipe"){
             RetrieveData d = new RetrieveData();
             d.execute(s);
-            p_food parse = d.get();
+            parse = d.get();
 
-            Intent intent = new Intent(this, recipe_viewer.class);
-            //Send the parsed recipe through the intent.
-            intent.putExtra("Recipe", parse);
-            startActivity(intent);
         }
         else{
             RetrieveDataNet d = new RetrieveDataNet();
             d.execute(s);
-            p_foodnetwork parsenet = d.get();
-
-            Intent intent = new Intent(this, recipe_viewer.class);
-            //Send the parsed recipe through the intent.
-            intent.putExtra("Recipe", parsenet);
-            startActivity(intent);
+            parse = d.get();
         }
+
+        Intent intent = new Intent(this, recipe_viewer.class);
+        //Send the parsed recipe through the intent.
+        intent.putExtra("Recipe", parse);
+        startActivity(intent);
     }
 
 }

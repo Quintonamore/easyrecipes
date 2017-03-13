@@ -25,6 +25,8 @@ public class ExampleUnitTest {
 
         assertEquals(t.r_parse.recipeName, "Bourbon Chicken");
 
+        System.out.println(t.toString());
+
     }
 
     @Test

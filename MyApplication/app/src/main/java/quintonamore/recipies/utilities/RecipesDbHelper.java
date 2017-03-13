@@ -17,11 +17,12 @@ public class RecipesDbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Recipes.db";
 
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + "RECIPES" + " (" +
-                    "RECIPE INTEGER PRIMARY KEY)";
+            "CREATE TABLE " + FeedReaderContract.FeedEntry.TABLE_NAME + " (" +
+                    FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY)" +
+                    FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS RECIPE";
+            "DROP TABLE IF EXISTS" + FeedReaderContract.FeedEntry.TABLE_NAME;
 
     public RecipesDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

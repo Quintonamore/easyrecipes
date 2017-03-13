@@ -1,6 +1,7 @@
 package quintonamore.recipies;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.webkit.WebView;
 import java.util.concurrent.ExecutionException;
 
 import quintonamore.recipies.parsers.p_food;
+import quintonamore.recipies.utilities.RecipesDbHelper;
 import quintonamore.recipies.utilities.RetrieveData;
 
 public class siteSelect extends AppCompatActivity {
@@ -22,6 +24,11 @@ public class siteSelect extends AppCompatActivity {
         setContentView(R.layout.activity_site_select);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        RecipesDbHelper dbHelp = new RecipesDbHelper(getApplicationContext());
+
+        SQLiteDatabase db = dbHelp.getReadableDatabase();
+
 
     }
 
