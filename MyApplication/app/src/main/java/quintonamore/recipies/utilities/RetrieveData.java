@@ -7,6 +7,8 @@ import quintonamore.recipies.parsers.recipeParse;
 
 /**
  * Created by Quinton on 11/17/2016.
+ *
+ * Class needed to retrieve information outside of the
  */
 
 public class RetrieveData extends AsyncTask<String, Void, p_food> {

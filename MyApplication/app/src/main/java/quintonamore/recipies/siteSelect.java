@@ -16,6 +16,9 @@ import quintonamore.recipies.parsers.p_food;
 import quintonamore.recipies.utilities.RecipesDbHelper;
 import quintonamore.recipies.utilities.RetrieveData;
 
+/**
+ * Site select android view, temporarily two buttons
+ */
 public class siteSelect extends AppCompatActivity {
 
     @Override
@@ -25,14 +28,21 @@ public class siteSelect extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        RecipesDbHelper dbHelp = new RecipesDbHelper(getApplicationContext());
 
-        SQLiteDatabase db = dbHelp.getReadableDatabase();
+        //RecipesDbHelper dbHelp = new RecipesDbHelper(getApplicationContext());
+
+        //SQLiteDatabase db = dbHelp.getReadableDatabase();
 
 
     }
 
 
+    /**
+     * On Click for the food.com button, temporary.
+     * @param view
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void onClickFood(View view) throws ExecutionException, InterruptedException {
 
         String str = "http://www.food.com/recipe";
@@ -43,6 +53,12 @@ public class siteSelect extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * On Click for the foodnetwork.com btn, temporary.
+     * @param view
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public void onClickFoodNet(View view) throws ExecutionException, InterruptedException {
 
         String str = "http://www.foodnetwork.com/recipes";

@@ -1,5 +1,6 @@
 package quintonamore.recipies;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
@@ -11,7 +12,10 @@ import quintonamore.recipies.parsers.recipeParse;
 
 import static quintonamore.recipies.R.layout.activity_recipe_viewer;
 
-public class recipe_viewer extends AppCompatActivity {
+/**
+ * A simple view for the recipe.
+ */
+public class recipe_viewer extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,7 @@ public class recipe_viewer extends AppCompatActivity {
         TextView RName;
 
         while((RName = (TextView) findViewById(R.id.textViewRecipe)) == null){
-            // Just loop!
+            // Just loop! Still working out why this works. Not good at all.
         }
 
         RName.setText(parse.getRecipe().recipeName);

@@ -12,6 +12,8 @@ import static org.junit.Assert.*;
  * of the p_food class.
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ *
+ * Note to self, more comprehensive testing on parsers.
  */
 public class ExampleUnitTest {
     /*

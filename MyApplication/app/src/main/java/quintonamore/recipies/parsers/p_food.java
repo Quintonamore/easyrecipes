@@ -13,6 +13,8 @@ import quintonamore.recipies.models.recipe;
  * Created by Quinton on 11/16/2016.
  * Parser to grab information from a URL then parse it into a recipe object. This class
  * specifically grabs a recipe from food.com
+ *
+ * Needs more comments, Q!
  */
 
 public class p_food extends recipeParse implements Serializable {

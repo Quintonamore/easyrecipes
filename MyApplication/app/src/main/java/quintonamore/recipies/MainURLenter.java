@@ -38,6 +38,11 @@ public class MainURLenter extends AppCompatActivity {
         WebView b = (WebView) findViewById(R.id.webView);
 
 
+        btn = (Button) findViewById(R.id.gen_recipe);
+        btn.setVisibility(View.INVISIBLE);
+        btn.setEnabled(false);
+
+
         //Setting edits needed to view webpages.
         b.getSettings().setJavaScriptEnabled(true);
 
@@ -46,12 +51,52 @@ public class MainURLenter extends AppCompatActivity {
         b.getSettings().setDatabaseEnabled(true);
         b.getSettings().setDomStorageEnabled(true);
 
-        b.setWebViewClient(new WebViewClient());
+        //Web client to check to see if the btn that generates the recipe code should be pressable.
+        b.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url){
+
+                String s = view.getUrl();
+
+                recipeParse parse;
+
+                try {
+
+                    //Check to see which parser to use
+                    if (website.equals("http://www.food.com/recipe")) {
+                        RetrieveData a = new RetrieveData();
+                        a.execute(s);
+                        parse = a.get();
+
+                    } else {
+                        RetrieveDataNet d = new RetrieveDataNet();
+                        d.execute(s);
+                        parse = d.get();
+                    }
+                } catch (Exception e){
+                    // do something
+                    parse = new recipeParse();
+                }
+
+                //Btn is not pressable make sure to disable it
+                if(parse.getRecipe().recipeName.equals("")){
+                    btn.setEnabled(false);
+                    btn.setVisibility(View.INVISIBLE);
+                }
+                //Btn is pressable re-enable it!
+                else{
+                    btn.setEnabled(true);
+                    btn.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         website = (String) getIntent().getSerializableExtra("url");
 
         //Set the webview to the only site I have set up data scraping from.
         b.loadUrl(website);
+
+
 
 
     }
@@ -68,7 +113,7 @@ public class MainURLenter extends AppCompatActivity {
         recipeParse parse;
 
         //Check to see which parser to use
-        if(website == "http://www.food.com/recipe"){
+        if(website.equals("http://www.food.com/recipe")){
             RetrieveData d = new RetrieveData();
             d.execute(s);
             parse = d.get();
