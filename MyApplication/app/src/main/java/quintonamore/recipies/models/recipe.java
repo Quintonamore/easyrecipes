@@ -67,11 +67,21 @@ public class recipe implements Serializable{
      * @return
      */
     public String getIAmount(int i){
-        return i_list.get(i).getAmmount();
+
+        try {
+            return i_list.get(i).getAmmount();
+        } catch(Exception e){
+            //Error handling for the case where a user tries to get something out of bounds.
+            System.out.println("Went one too far, try again!");
+            return "";
+        }
     }
 
     /**
      * Return the name of the ingredient.
+     *
+     * Currently not used, parsing is weird and puts all of the information in the Ingredient Ammount
+     * list. Keeping the function just in case a future parser manages to use this functionality.
      * @param i
      * @return
      */
